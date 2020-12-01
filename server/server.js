@@ -15,4 +15,5 @@ app.get('/api', (req, res) => {
   res.json({ status: 'Alive and awake' });
 });
 
-app.listen(4000);
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log('Server successfully started on: ' + PORT));
