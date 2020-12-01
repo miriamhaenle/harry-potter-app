@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 export default function Characters({ characters }) {
   return (
     <Container>
-      {console.log(characters)}
+      <h2>Characters</h2>
       {characters.map((character) => (
         <li key={character.name}>
           <img
