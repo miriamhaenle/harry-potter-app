@@ -6,7 +6,10 @@ export default function Characters({ characters }) {
       {console.log(characters)}
       {characters.map((character) => (
         <li key={character.name}>
-          <img src={character.image} alt={character.name} />
+          <img
+            src={character.image.replace('http', 'https')}
+            alt={character.name}
+          />
           <div>{character.name}</div>
           <HouseContainer color={houseColor(character.house)}>
             {character.house}
