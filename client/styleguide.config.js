@@ -5,8 +5,7 @@ module.exports = {
     color: {
       sidebarBackground: 'tomato',
       base: 'hotpink',
-      baseBackground: 'crimson',
-
+      baseBackground: '#17141d',
       border: 'purple',
     },
   },

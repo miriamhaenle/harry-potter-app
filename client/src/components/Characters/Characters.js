@@ -28,6 +28,8 @@ export default function Characters({ characters }) {
 }
 
 const Container = styled.ul`
+  background: #17141d;
+
   color: #fff;
   display: grid;
   font-family: sans-serif;
