@@ -1,39 +1,16 @@
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
 import { dirname } from './helpers.js';
-import { default as mongodb } from 'mongodb';
-import dotenv from 'dotenv';
-
-dotenv.config();
-const {
-  DATABASE_USER,
-  DATABASE_PASSWORD,
-  DATABASE_NAME,
-  DATABASE_HOST,
-} = process.env;
-
-let MongoClient = mongodb.MongoClient;
+import { connectDatabase, database, disconnectDatabase } from './database.js';
 
 const app = express();
 const __dirname = dirname(import.meta.url);
 
-const uri = `mongodb+srv://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}/${DATABASE_NAME}`;
+connectDatabase();
 
-async function run() {
-  const client = new MongoClient(uri);
-
-  try {
-    await client.connect();
-    const db = client.db(DATABASE_NAME);
-    const collection = db.collection('hogwarts-houses');
-    const housesPoints = await collection
-      .find({})
-      .toArray((error, docs) => console.log(docs));
-  } catch (error) {
-    console.error(error);
-  }
-}
-
+app.use(cors());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get('/', (req, res) => {
@@ -43,6 +20,38 @@ app.get('/', (req, res) => {
 app.get('/api', (req, res) => {
   res.json({ status: 'Alive and awake' });
 });
+
+app.get('/api/spells', async (req, res) => {
+  const collection = database().collection('spells');
+  return await collection.find({}).toArray((error, docs) => res.json(docs));
+});
+
+app.get('/api/leaderboard', async (req, res) => {
+  const collection = database().collection('leaderboard');
+  return await collection.find({}).toArray((error, docs) => res.json(docs));
+});
+
+app.post('/api/leaderboard', async (req, res) => {
+  const houseToUpdate = req.body;
+  const collection = database().collection('leaderboard');
+  return await collection
+    .find({ house: houseToUpdate.house.toLowerCase() })
+    .toArray((error, docs) =>
+      updateLeaderBoard(
+        docs.find((house) => house.house === houseToUpdate.house.toLowerCase()),
+        houseToUpdate.points
+      ).then(() => res.json('Updated house'))
+    );
+});
+
+async function updateLeaderBoard(houseToUpdate, housePoints) {
+  const collection = database().collection('leaderboard');
+  return await collection.updateOne(
+    houseToUpdate,
+    { $set: { points: houseToUpdate.points + housePoints } },
+    (error, result) => console.log(result)
+  );
+}
 
 app.get('/dbs', (req, res) => {
   run();
