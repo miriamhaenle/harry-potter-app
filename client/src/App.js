@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import getCharacters from './services/getCharacters'
-import Characters from './components/Characters'
+import Characters from './components/Characters/Characters'
 import styled from 'styled-components/macro'
-import HighScore from './components/HighScore'
+import HighScore from './components/HighScore/HighScore'
 
 function App() {
   const [characters, setCharacters] = useState([])
