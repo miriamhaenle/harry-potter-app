@@ -3,6 +3,7 @@ import getCharacters from './services/getCharacters'
 import Characters from './components/Characters/Characters'
 import styled from 'styled-components/macro'
 import HighScore from './components/HighScore/HighScore'
+import WizardMatch from './pages/WizardMatch'
 
 function App() {
   const [characters, setCharacters] = useState([])
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <Container>
+      <WizardMatch />
       <HighScore scores={houseScores} />
       <Characters characters={characters} />
     </Container>

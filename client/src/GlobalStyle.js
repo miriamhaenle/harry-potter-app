@@ -25,10 +25,11 @@ const GlobalStyle = createGlobalStyle`
  --hufflepuff-primary-lightest: #FFF4B1;
  --hufflepuff-secondary: #60605C;
 
+  --font-color: #fff;
+  
 }
 
 body {
-  background-color: hotpink;
   margin: 0;
   padding: 0;
   font-family: sans-serif;

@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "gryffindor",
+    "name": "Gryffindor",
+    "headOfHouse": "Minerva McGonnagall"
+  },
+  {
+    "_id": "hufflepuff",
+    "name": "Hufflepuff",
+    "headOfHouse": "Pomona Spout"
+  },
+  {
+    "_id": "ravenclaw",
+    "name": "Ravenclaw",
+    "headOfHouse": "Filius Flitwick"
+  },
+  {
+    "_id": "slytherin",
+    "name": "Slytherin",
+    "headOfHouse": "Severus Snape"
+  }
+]
