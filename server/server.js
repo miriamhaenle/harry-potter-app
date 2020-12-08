@@ -2,22 +2,29 @@ import express from 'express';
 import path from 'path';
 import { dirname } from './helpers.js';
 import { default as mongodb } from 'mongodb';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const {
+  DATABASE_USER,
+  DATABASE_PASSWORD,
+  DATABASE_NAME,
+  DATABASE_HOST,
+} = process.env;
+
 let MongoClient = mongodb.MongoClient;
 
 const app = express();
 const __dirname = dirname(import.meta.url);
-const databaseUser = 'MathewGriffinthore';
-const databasePassword = 'A1hrmRBi3QyfRDGB';
-const databaseName = 'harry-potter-wizard-game';
 
-const uri = `mongodb+srv://${databaseUser}:${databasePassword}@miriam-super-cluster.q4ahs.mongodb.net/test?authSource=admin&replicaSet=atlas-pq5i4z-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`;
+const uri = `mongodb+srv://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}/${DATABASE_NAME}`;
 
 async function run() {
   const client = new MongoClient(uri);
 
   try {
     await client.connect();
-    const db = client.db(databaseName);
+    const db = client.db(DATABASE_NAME);
     const collection = db.collection('hogwarts-houses');
     const housesPoints = await collection
       .find({})

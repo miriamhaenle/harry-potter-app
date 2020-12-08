@@ -27,5 +27,8 @@
   },
   "engines": {
     "node": "14.x"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
   }
 }
