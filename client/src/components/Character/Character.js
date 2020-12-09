@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import { houseColor } from '../../services/houseColor'
 
 export default function Character({ character }) {
   if (!character || !character.name) return null
@@ -14,26 +15,22 @@ export default function Character({ character }) {
       </HouseContainer>
     </PlayerCard>
   )
-
-  function houseColor(houseName) {
-    if (houseName === 'Gryffindor') return '#740001'
-    if (houseName === 'Slytherin') return '#1A472A'
-    if (houseName === 'Ravenclaw') return '#0E1A40'
-    if (houseName === 'Hufflepuff') return '#FFDB00'
-  }
 }
 
 const PlayerCard = styled.div`
   background: #17141d;
   border-radius: 5px;
-  box-shadow: -1rem 0 3rem #000;
+  box-shadow: -1rem 0 1.4rem #000;
   padding: 20px 10px;
   text-align: center;
   transform: translateY(-0.5rem);
   transition: 0.2s ease-in;
+  width: 160px;
+  height: 215px;
 
   img {
-    width: 70px;
+    margin-bottom: 1.4rem;
+    width: 100px;
   }
 `
 
