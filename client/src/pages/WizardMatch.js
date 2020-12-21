@@ -227,13 +227,18 @@ const BattleField = styled.div`
   }
 `
 const SpellButton = styled.button`
+  border: none;
+  border-radius: 5px;
+  box-shadow: -2px -2px 1rem #6a00c7, 2px 2px 5px #340061, 6px 6px 1rem #1b0033;
   color: var(--font-color);
   font-size: 1.5rem;
   padding: 0.5rem 2rem;
-  border: none;
   background: #7100d3;
 
   &[disabled] {
-    background: #340061;
+    background: #17141d;
+    box-shadow: -2px 0 1rem #340061, -4px 4px 1rem #6a00c7,
+      -6px 6px 1rem #1b0033;
+    color: #613389;
   }
 `
